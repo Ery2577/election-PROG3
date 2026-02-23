@@ -1,9 +1,9 @@
 public class Main {
+    public static void main(String[] args) {
+       // Pour afficher tout les votes dans l'election
+        DataRetriever retriever = new DataRetriever();
+        long totalVotes = retriever.countAllVotes();
 
-    public class Main {
-        public static void main(String[] args) {
-            VoteRepository voteRepository = new VoteRepository();
-            long totalVote = voteRepository.countAllVotes();
-            System.out.println("totalVote=" + totalVote);
-        }
+        System.out.println("All vote = " + totalVotes);
+    }
 }

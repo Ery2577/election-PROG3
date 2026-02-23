@@ -1,5 +1,3 @@
 public enum VoteType {
-    VALID,
-    BLANK,
-    NULL
+    VALID, BLANK, NULL
 }
