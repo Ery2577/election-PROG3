@@ -1,11 +1,9 @@
 public class Main {
 
-    public static void main(String[] args) {
-
-        DataRetriever dataRetriever = new DataRetriever();
-
-        long totalVote = dataRetriever.countAllVotes();
-        System.out.println("totalVote=" + totalVote);
-
-    }
+    public class Main {
+        public static void main(String[] args) {
+            VoteRepository voteRepository = new VoteRepository();
+            long totalVote = voteRepository.countAllVotes();
+            System.out.println("totalVote=" + totalVote);
+        }
 }

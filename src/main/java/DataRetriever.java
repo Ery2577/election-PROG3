@@ -8,24 +8,22 @@ public class DataRetriever {
     private DBConnection dbConnection = new DBConnection();
 
     public long countAllVotes() {
-
-        String sql =
-                "" +
-                    "SELECT COUNT(*) AS total_votes FROM vote" +
+        long totalVotes = 0;
+        String sql = "" +
+                "SELECT COUNT(*) AS total_votes FROM vote" +
                 "";
 
-
-        try (Connection conn = dbConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
 
             if (rs.next()) {
-                return rs.getLong("total_votes");
+                totalVotes = rs.getLong("total_votes");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Erreur lors du comptage des votes : " + e.getMessage());
         }
-        return 0;
+        return totalVotes;
     }
 
 
