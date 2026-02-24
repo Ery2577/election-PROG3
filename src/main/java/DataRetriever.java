@@ -134,4 +134,30 @@ public class DataRetriever {
         }
         return 0.0;
     }
+
+    // Q6 - Résultat élection
+    public ElectionResult findWinner() {
+        String sql = "SELECT c.name AS candidate_name, COUNT(v.id) AS valid_vote_count " +
+                "FROM candidate c " +
+                "JOIN vote v ON c.id = v.candidate_id " +
+                "WHERE v.vote_type = 'VALID' " +
+                "GROUP BY c.name " +
+                "ORDER BY valid_vote_count DESC " +
+                "LIMIT 1";
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+
+            if (rs.next()) {
+                return new ElectionResult(
+                        rs.getString("candidate_name"),
+                        rs.getLong("valid_vote_count")
+                );
+            }
+        } catch (SQLException e) {
+            System.out.println("Erreur Q6 : " + e.getMessage());
+        }
+        return null;
+    }
 }

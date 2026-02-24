@@ -42,5 +42,18 @@ public class Main {
         double turnoutRate = retriever.computeTurnoutRate();
 
         System.out.println("Donc taux de participations = " + turnoutRate + "%");
+
+            System.out.println("==========================");
+
+        // Q6 - Résultat élection
+        System.out.println("Question 6 : ");
+        ElectionResult winner = retriever.findWinner();
+
+        if (winner != null) {
+            System.out.println(winner);
+        } else {
+            System.out.println("Aucun gagnant trouvé.");
+        }
+
     }
 }

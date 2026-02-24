@@ -23,3 +23,14 @@ SELECT
     (SELECT COUNT(*) FROM voter) AS "Total Electeurs",
     (SELECT COUNT(*) FROM vote) AS "Total Votes",
     ((SELECT COUNT(*) FROM vote)::float / (SELECT COUNT(*) FROM voter) * 100) || '%' AS "Taux";
+
+/* Q6 - Résultat élection */
+SELECT
+    c.name AS candidate_name,
+    COUNT(v.id) AS valid_vote_count
+FROM candidate c
+         JOIN vote v ON c.id = v.candidate_id
+WHERE v.vote_type = 'VALID'
+GROUP BY c.name
+ORDER BY valid_vote_count DESC
+LIMIT 1;
