@@ -83,5 +83,27 @@ public class DataRetriever {
     }
 
 
-    // Q4 -
+    // Q4 - Synthèse globale des votes (une seule ligne)
+    public VoteSummary computeVoteSummary() {
+        String sql = "SELECT " +
+                "(SELECT COUNT(*) FROM vote WHERE vote_type = 'VALID') AS valid_count, " +
+                "(SELECT COUNT(*) FROM vote WHERE vote_type = 'BLANK') AS blank_count, " +
+                "(SELECT COUNT(*) FROM vote WHERE vote_type = 'NULL') AS null_count";
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+
+            if (rs.next()) {
+                return new VoteSummary(
+                        rs.getLong("valid_count"),
+                        rs.getLong("blank_count"),
+                        rs.getLong("null_count")
+                );
+            }
+        } catch (SQLException e) {
+            System.out.println("Erreur Q4 : " + e.getMessage());
+        }
+        return new VoteSummary(0, 0, 0);
+    }
 }

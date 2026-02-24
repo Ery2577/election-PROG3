@@ -10,27 +10,33 @@ public class Main {
         System.out.println("Question 1 : " );
         System.out.println("All vote = " + totalVotes);
 
-        System.out.println("==========================" );
+            System.out.println("==========================" );
 
         // Q2 : Affiche le nombre de vote par type
         List<voteTypeCount> typeCounts = retriever.countVotesByType();
         System.out.println("Question 2 : " );
         System.out.println(typeCounts);
 
-        System.out.println("==========================" );
+            System.out.println("==========================" );
 
         // Q3 - Affiche le nombre de votes valide par candidat
         System.out.println("Question 3 : ");
         List<CandidateVoteCount> candidateVotes = retriever.countValidVotesByCandidate();
-
         List<Object> finalDisplayQ3 = new ArrayList<>();
-
         for (CandidateVoteCount cvc : candidateVotes) {
             finalDisplayQ3.add(cvc.getCandidateName() + "=" + cvc.getValidVoteCount());
         }
-
         System.out.println(finalDisplayQ3);
 
-        // Q4 :
+            System.out.println("==========================");
+
+        // Q4 - Synthèse globale des votes (une seule ligne)
+        System.out.println("Question 4 : ");
+        VoteSummary summary = retriever.computeVoteSummary();
+        System.out.println(summary);
+
+            System.out.println("==========================");
+
+        // Q5 - Taux de participation
     }
 }
