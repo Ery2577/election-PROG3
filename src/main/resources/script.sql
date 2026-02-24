@@ -2,7 +2,7 @@
 SELECT COUNT(*) AS total_votes FROM vote;
 
 /* Q2 - Nombre de votes par type */
-SELECT vote_type, COUNT(*) AS count FROM vote GROUP BY vote_type
+SELECT vote_type, COUNT(*) AS count FROM vote GROUP BY vote_type;
 
 /* Q3 - Nombre de votes valides par candidat */
 SELECT
@@ -13,3 +13,4 @@ FROM candidate c
 GROUP BY c.name;
 
 /* Q4 - Synthèse globale des votes (une seule ligne) */
+

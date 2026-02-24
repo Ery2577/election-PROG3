@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
@@ -15,5 +16,21 @@ public class Main {
         List<voteTypeCount> typeCounts = retriever.countVotesByType();
         System.out.println("Question 2 : " );
         System.out.println(typeCounts);
+
+        System.out.println("==========================" );
+
+        // Q3 - Affiche le nombre de votes valide par candidat
+        System.out.println("Question 3 : ");
+        List<CandidateVoteCount> candidateVotes = retriever.countValidVotesByCandidate();
+
+        List<Object> finalDisplayQ3 = new ArrayList<>();
+
+        for (CandidateVoteCount cvc : candidateVotes) {
+            finalDisplayQ3.add(cvc.getCandidateName() + "=" + cvc.getValidVoteCount());
+        }
+
+        System.out.println(finalDisplayQ3);
+
+        // Q4 :
     }
 }

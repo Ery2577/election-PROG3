@@ -55,4 +55,33 @@ public class DataRetriever {
         }
         return results;
     }
+
+    // Q3 : Affiche le nombre de votes valides par candidat
+    public  List<CandidateVoteCount> countValidVotesByCandidate() {
+        List<CandidateVoteCount> results = new ArrayList<>();
+
+        String sql = "SELECT c.name AS candidate_name, COUNT(v.id) AS valid_vote " +
+                "FROM candidate c " +
+                "LEFT JOIN vote v ON c.id = v.candidate_id AND v.vote_type = 'VALID' " +
+                "GROUP BY c.name " +
+                "ORDER BY valid_vote ";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+
+            while (rs.next()) {
+                String name = rs.getString("candidate_name");
+                long count = rs.getLong("valid_vote");
+
+               results.add(new CandidateVoteCount(name, count));
+            }
+        } catch (SQLException e) {
+            System.out.println("Erreur Q3 : " + e.getMessage());
+        }
+        return results;
+    }
+
+
+    // Q4 -
 }
