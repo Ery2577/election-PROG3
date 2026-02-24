@@ -106,4 +106,32 @@ public class DataRetriever {
         }
         return new VoteSummary(0, 0, 0);
     }
+
+    // Q5 - Taux de participation
+    public double computeTurnoutRate() {
+        long totalVotes = this.countAllVotes();
+        long totalVoters = 0;
+
+        String sql = "SELECT COUNT(*) AS total_voters FROM voter";
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+
+            if (rs.next()) {
+                totalVoters = rs.getLong("total_voters");
+            }
+
+            System.out.println("_ Nombre total d’électeurs : " + totalVoters);
+            System.out.println("_ Nombre de votes enregistrés : " + totalVotes);
+
+            if (totalVoters == 0) return 0.0;
+
+            return ((double) totalVotes / totalVoters) * 100.0;
+
+        } catch (SQLException e) {
+            System.out.println("Erreur Q5 : " + e.getMessage());
+        }
+        return 0.0;
+    }
 }

@@ -38,5 +38,9 @@ public class Main {
             System.out.println("==========================");
 
         // Q5 - Taux de participation
+        System.out.println("Question 5 : ");
+        double turnoutRate = retriever.computeTurnoutRate();
+
+        System.out.println("Donc taux de participations = " + turnoutRate + "%");
     }
 }

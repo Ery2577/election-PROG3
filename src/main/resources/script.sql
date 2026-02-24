@@ -18,3 +18,8 @@ SELECT
     (SELECT COUNT(*) FROM vote WHERE vote_type = 'BLANK') AS blank_count,
     (SELECT COUNT(*) FROM vote WHERE vote_type = 'NULL') AS null_count;
 
+/* Q5 - Taux de participation */
+SELECT
+    (SELECT COUNT(*) FROM voter) AS "Total Electeurs",
+    (SELECT COUNT(*) FROM vote) AS "Total Votes",
+    ((SELECT COUNT(*) FROM vote)::float / (SELECT COUNT(*) FROM voter) * 100) || '%' AS "Taux";
